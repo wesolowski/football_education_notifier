@@ -1,3 +1,4 @@
+import 'package:football_education_notifier/education_dto.dart';
 import 'request.dart';
 
 class Mapper {
@@ -5,7 +6,9 @@ class Mapper {
 
   Mapper({required this.request});
 
-  Future<void> map() async {
+  Future<List<EducationDTO>> map() async {
+
+    List<EducationDTO> educationList = [];
     final String url = 'https://www.dfbnet.org/coach/api/tenants/0123456789ABCDEF0123456700004120/events';
     //final String name = 'C-Lizenz Fortbildung'
     final String sectionId = '02JH75VKLS000000VS5489B6VS5JE35A';
@@ -14,10 +17,21 @@ class Mapper {
     for (var eventList in responseData) {
       eventList['events'].forEach((event) {
         if (event['section']['id'] == sectionId) {
-          print(event['name']);
+          EducationDTO educationDTO = EducationDTO(
+            id: event['id'],
+            number: event['number'],
+            locationName: event['location']['name'],
+            street: event['location']['address']['street'],
+            city: event['location']['address']['city'],
+            begins: DateTime.parse(event['begins']),
+            openSeats: event['openSeats'],
+          );
+
+          educationList.add(educationDTO);
         }
       });
     }
 
+    return educationList;
   }
 }
