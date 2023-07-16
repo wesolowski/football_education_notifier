@@ -4,11 +4,14 @@ version: 1.0.0
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.0.5
+  sdk: ^3.0.6
 
 # Add regular dependencies here.
 dependencies:
   http: ^1.0.0
+  dotenv: ^4.1.0
+  mailer: ^6.0.0
+  intl: ^0.18.0
 
 dev_dependencies:
   lints: ^2.0.0

@@ -1,11 +1,12 @@
 class EducationDTO {
-  String id;
-  String number;
-  String locationName;
-  String street;
-  String city;
-  DateTime begins;
-  int openSeats;
+  final String id;
+  final String number;
+  final String locationName;
+  final String street;
+  final String city;
+  final DateTime begins;
+  final int openSeats;
+  final String url;
 
   EducationDTO({
     required this.id,
@@ -15,5 +16,6 @@ class EducationDTO {
     required this.city,
     required this.begins,
     required this.openSeats,
+    required this.url,
   });
 }

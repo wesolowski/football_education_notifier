@@ -30,6 +30,7 @@ class Mapper implements MapperInterface{
             city: event['location']['address']['city'],
             begins: DateTime.parse(event['begins']),
             openSeats: event['openSeats'],
+            url: 'https://www.dfbnet.org/coach/FVM/goto/education/offers/details/0123456789ABCDEF0123456700004120/${event['id']}',
           );
 
           educationList.add(educationDTO);

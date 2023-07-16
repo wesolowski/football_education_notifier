@@ -70,6 +70,7 @@ void main() {
     expect(result[0].city, 'Event City');
     expect(result[0].begins, DateTime.parse('2099-07-01T10:00:00Z'));
     expect(result[0].openSeats, 10);
+    expect(result[0].url, 'https://www.dfbnet.org/coach/FVM/goto/education/offers/details/0123456789ABCDEF0123456700004120/02LVDVS8U8000000VS5489BCVVOMIMKB');
 
     expect(result[1].id, 'unit');
     expect(result[1].number, 'test123');
@@ -77,7 +78,6 @@ void main() {
   });
 }
 
-// Mock RequestInterface class for testing
 class MockRequestInterface implements RequestInterface {
   dynamic mockResponse;
 
