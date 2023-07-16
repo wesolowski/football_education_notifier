@@ -1,0 +1,54 @@
+name: Dart CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    container:
+      image: google/dart:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run static analysis
+        run: dart analyze
+      - name: Check for automatic fixes
+        run: |
+          if dart fix --dry-run | grep 'Nothing to fix'; then
+            echo "No fixes available."
+          else
+            echo "Fixes available. Please run 'dart fix' locally and push the changes."
+            exit 1
+          fi
+
+  test:
+    needs: analyze
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: google/dart:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run tests with code coverage
+        run: |
+          dart pub global activate coverage
+          dart test --coverage=./coverage
+          dart pub global run coverage:format_coverage --lcov --in=coverage --out=lcov.info --packages=.packages --report-on=lib
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          file: ./lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
