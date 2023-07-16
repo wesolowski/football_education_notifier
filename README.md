@@ -1,5 +1,7 @@
 # Football Education Notifier
 
+[![codecov](https://codecov.io/gh/wesolowski/football_education_notifier/branch/main/graph/badge.svg?token=9C026256MB)](https://codecov.io/gh/wesolowski/football_education_notifier)
+
 ### Business Requirement:
 
 
