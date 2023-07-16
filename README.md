@@ -31,5 +31,5 @@ dart
 ### Usage:
 
    ```sh
-   dart pub get
+   dart run
    ```
