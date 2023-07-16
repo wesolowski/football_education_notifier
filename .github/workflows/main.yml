@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: dart test --coverage=./coverage
       - name: Generate LCOV report
-        run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage.lcov
+        run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage.lcov  --report-on=lib
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
