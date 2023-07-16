@@ -27,8 +27,14 @@ jobs:
             echo "Fixes available. Please run 'dart fix' locally and push the changes."
             exit 1
           fi
-      - name: Run tests with code coverage
-        run: |
-          dart test
-  
+      - name: Run tests
+        run: dart test --coverage=./coverage
+      - name: Generate LCOV report
+        run: dart run coverage:format_coverage --lcov --in=coverage --out=coverage.lcov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage.lcov
+          fail_ci_if_error: true
   

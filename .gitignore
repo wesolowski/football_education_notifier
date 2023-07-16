@@ -3,3 +3,11 @@
 .idea
 .env
 check_event.json
+coverage/
+
+*.aot
+*.dill
+*.jit
+*.exe
+out.js
+coverage.lcov
