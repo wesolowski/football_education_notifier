@@ -27,20 +27,8 @@ jobs:
             echo "Fixes available. Please run 'dart fix' locally and push the changes."
             exit 1
           fi
-
-  test:
-    needs: analyze
-
-    runs-on: ubuntu-latest
-
-    container:
-      image: dart:latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: dart pub get
       - name: Run tests with code coverage
         run: |
           dart test
+  
   
