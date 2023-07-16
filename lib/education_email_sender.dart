@@ -21,9 +21,9 @@ class EducationEmailSender implements EducationEmailSenderInterface {
 
     final email = env['GMAIL_SMTP_EMAIL'];
     final password = env['GMAIL_SMTP_PASSWORD'];
-    final email_to = env['EMAIL_TO'];
+    final emailTo = env['EMAIL_TO'];
 
-    if (email == null || password == null || email_to == null) {
+    if (email == null || password == null || emailTo == null) {
       throw Exception('No email, password or email_to found in .env file');
     }
 
@@ -34,8 +34,8 @@ class EducationEmailSender implements EducationEmailSenderInterface {
 
     final message = Message()
       ..from = Address(email, 'Football Education Bot')
-      ..recipients.add(email_to)
-      ..subject = 'Fussball Fortbildung | ${formattedDate}'
+      ..recipients.add(emailTo)
+      ..subject = 'Fussball Fortbildung | $formattedDate'
       ..html =
           "<h2>Fussball Fortbildung</h2>\n${formatEducationList(educationList)}";
 

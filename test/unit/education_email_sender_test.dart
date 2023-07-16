@@ -37,7 +37,7 @@ void main() {
           },
         ];
 
-        testData.forEach((data) {
+        for (var data in testData) {
           env.clear();
           env.addAll(data);
 
@@ -46,7 +46,7 @@ void main() {
             env: env,
           );
           expect(() => educationEmailSender.sendEmail([]), throwsException);
-        });
+        }
     });
 
 
@@ -94,7 +94,7 @@ void main() {
       DateTime now = DateTime.now();
       String formattedDate = DateFormat('yyyy-MM-dd').format(now);
 
-      expect(spyMailSend.message.subject, 'Fussball Fortbildung | ${formattedDate}');
+      expect(spyMailSend.message.subject, 'Fussball Fortbildung | $formattedDate');
 
       for (final education in educationList) {
         expect(spyMailSend.message.html, contains('Bildungsangebot ${education.number}'));
