@@ -1,11 +1,16 @@
 import 'package:football_education_notifier/education_dto.dart';
 import 'request.dart';
 
-class Mapper {
+abstract class MapperInterface {
+  Future<List<EducationDTO>> map();
+}
+
+class Mapper implements MapperInterface{
   final RequestInterface request;
 
   Mapper({required this.request});
 
+  @override
   Future<List<EducationDTO>> map() async {
 
     List<EducationDTO> educationList = [];
