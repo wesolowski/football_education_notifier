@@ -42,13 +42,5 @@ jobs:
         run: dart pub get
       - name: Run tests with code coverage
         run: |
-          dart pub global activate coverage
-          dart test --coverage=./coverage
-          dart pub global run coverage:format_coverage --lcov --in=coverage --out=lcov.info --packages=.packages --report-on=lib
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          file: ./lcov.info
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
+          dart test
+  
