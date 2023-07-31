@@ -29,9 +29,32 @@ dart
    ```sh
    dart pub get
    ```
+   
+4. Create a .env file in the root directory and add the following environment variables:
+
+   ```sh
+   GMAIL_SMTP_EMAIL=YOUR_EMAIL
+   GMAIL_SMTP_PASSWORD=YOUR_PASSWORD
+   EMAIL_TO=YOUR_EMAIL_SEND
+    ```
+         
 
 ### Usage:
+
+#### Run the script
 
    ```sh
    dart run
    ```
+
+#### Run the script with debug mode
+
+   ```sh
+   dart run --observe --pause-isolates-on-start
+   ```
+
+#### Test
+
+    ```sh
+    dart test
+    ```

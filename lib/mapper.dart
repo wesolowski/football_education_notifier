@@ -1,7 +1,7 @@
 import 'package:football_education_notifier/education_dto.dart';
 import 'request.dart';
 
-abstract class MapperInterface {
+abstract interface class MapperInterface {
   Future<List<EducationDTO>> map();
 }
 
@@ -24,7 +24,7 @@ class Mapper implements MapperInterface{
         if (event['section']['id'] == sectionId) {
           EducationDTO educationDTO = EducationDTO(
             id: event['id'],
-            number: event['number'],
+            name: event['name'],
             locationName: event['location']['name'],
             street: event['location']['address']['street'],
             city: event['location']['address']['city'],

@@ -55,7 +55,7 @@ void main() {
       List<EducationDTO> educationList = [];
       educationList.add(EducationDTO(
         id: '02LVDVS8U8000000VS5489BCVVOMIMKB',
-        number: 'ABC123',
+        name: 'ABC123',
         locationName: 'Event Location',
         street: 'Event Street',
         city: 'Event City',
@@ -65,7 +65,7 @@ void main() {
       ));
       educationList.add(EducationDTO(
         id: 'unit',
-        number: 'test',
+        name: 'test',
         locationName: 'Unit Location',
         street: 'Unit Street',
         city: 'Unit City',
@@ -97,7 +97,7 @@ void main() {
       expect(spyMailSend.message.subject, 'Fussball Fortbildung | $formattedDate');
 
       for (final education in educationList) {
-        expect(spyMailSend.message.html, contains('Bildungsangebot ${education.number}'));
+        expect(spyMailSend.message.html, contains('Name: ${education.name}'));
         expect(spyMailSend.message.html, contains('Ort: ${education.locationName}'));
         expect(spyMailSend.message.html, contains('Adresse: ${education.street}, ${education.city}'));
         expect(spyMailSend.message.html, contains('Beginn: ${DateFormat('yyyy-MM-dd HH:mm').format(education.begins)}'));

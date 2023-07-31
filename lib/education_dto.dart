@@ -1,6 +1,6 @@
 class EducationDTO {
   final String id;
-  final String number;
+  final String name;
   final String locationName;
   final String street;
   final String city;
@@ -10,7 +10,7 @@ class EducationDTO {
 
   EducationDTO({
     required this.id,
-    required this.number,
+    required this.name,
     required this.locationName,
     required this.street,
     required this.city,

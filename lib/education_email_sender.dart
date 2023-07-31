@@ -5,7 +5,7 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:intl/intl.dart';
 
-abstract class EducationEmailSenderInterface {
+abstract interface class EducationEmailSenderInterface {
   Future<String> sendEmail(List<EducationDTO> educationList);
 }
 
@@ -24,7 +24,7 @@ class EducationEmailSender implements EducationEmailSenderInterface {
     final emailTo = env['EMAIL_TO'];
 
     if (email == null || password == null || emailTo == null) {
-      throw Exception('No email, password or email_to found in .env file');
+      throw Exception('No email, password or subemail_to found in .env file');
     }
 
     final SmtpServer smtpServer = gmail(email, password);
@@ -53,7 +53,7 @@ class EducationEmailSender implements EducationEmailSenderInterface {
     for (final education in educationList) {
       buffer.writeln('<p></p>');
       buffer.writeln('<br />');
-      buffer.writeln('<p>Bildungsangebot ${education.number}</p>');
+      buffer.writeln('<p>Name: ${education.name}</p>');
       buffer.writeln('<p>Ort: ${education.locationName}</p>');
       buffer.writeln('<p>Adresse: ${education.street}, ${education.city}</p>');
       buffer.writeln('<p>Beginn: ${DateFormat('yyyy-MM-dd HH:mm').format(education.begins)}</p>');

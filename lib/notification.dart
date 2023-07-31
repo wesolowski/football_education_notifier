@@ -12,7 +12,7 @@ class Notification {
 
   check() async {
     var educationList = await mapper.map();
-    var infoList = infoFile.getContent();
+    List<String> infoList = infoFile.getContent();
 
     List<EducationDTO> educationListToSend = [];
 

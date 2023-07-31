@@ -17,7 +17,7 @@ void main() {
           },
           {
             'id': '02LVDVS8U8000000VS5489BCVVOMIMKB',
-            'number': 'ABC123',
+            'name': 'ABC123',
             'location': {
               'name': 'Event Location',
               'address': {
@@ -35,7 +35,7 @@ void main() {
         'events': [
           {
             'id': 'unit',
-            'number': 'test123',
+            'name': 'test123',
             'location': {
               'name': 'Ttest Location',
               'address': {
@@ -64,7 +64,7 @@ void main() {
 
     expect(result.length, 2);
     expect(result[0].id, '02LVDVS8U8000000VS5489BCVVOMIMKB');
-    expect(result[0].number, 'ABC123');
+    expect(result[0].name, 'ABC123');
     expect(result[0].locationName, 'Event Location');
     expect(result[0].street, 'Event Street');
     expect(result[0].city, 'Event City');
@@ -73,7 +73,7 @@ void main() {
     expect(result[0].url, 'https://www.dfbnet.org/coach/FVM/goto/education/offers/details/0123456789ABCDEF0123456700004120/02LVDVS8U8000000VS5489BCVVOMIMKB');
 
     expect(result[1].id, 'unit');
-    expect(result[1].number, 'test123');
+    expect(result[1].name, 'test123');
     expect(result[1].openSeats, 4);
   });
 }

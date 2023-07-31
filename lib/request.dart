@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-abstract class RequestInterface {
+abstract interface class RequestInterface {
   Future<List<dynamic>> fetchData(String url);
 }
 

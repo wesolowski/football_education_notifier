@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-abstract class InfoFileInterface {
+abstract interface class InfoFileInterface {
   List<String> getContent();
   void setContent(List<String> content);
 }
