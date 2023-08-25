@@ -14,7 +14,7 @@ jobs:
       image: dart:latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: dart pub get
       - name: Run static analysis
@@ -27,6 +27,11 @@ jobs:
             echo "Fixes available. Please run 'dart fix' locally and push the changes."
             exit 1
           fi
+      - name: Install fonttools, rsync and lcov
+        run: |
+          apt-get update -y
+          apt-get install -y python3-pip rsync lcov
+          pip3 install fonttools
       - name: Run tests
         run: dart test --coverage=./coverage
       - name: Generate LCOV report
@@ -37,4 +42,16 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: coverage.lcov
           fail_ci_if_error: true
-  
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          log-public-key: false
+      - name: Deploy to server
+        run: |
+          echo "GMAIL_SMTP_EMAIL=${{ secrets.GMAIL_SMTP_EMAIL_SECRET }}" >> .env
+          echo "GMAIL_SMTP_PASSWORD=${{ secrets.GMAIL_SMTP_PASSWORD_SECRET }}" >> .env
+          echo "EMAIL_TO=${{ secrets.EMAIL_TO_SECRET }}" >> .env
+          dart compile exe bin/football_education_notifier.dart -o bin/football_education_notifier
+          rsync -vaz -e "ssh -o StrictHostKeyChecking=no" bin/football_education_notifier ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/srv/football_education_notifier/bin
+          rsync -vaz -e "ssh -o StrictHostKeyChecking=no" .env ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/srv/football_education_notifier/
