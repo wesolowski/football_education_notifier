@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  analyze:
+  work:
     runs-on: ubuntu-latest
     container:
       image: dart:latest
@@ -34,7 +34,7 @@ jobs:
       - name: Install necessary tools
         run: |
           apt-get update -y
-          apt-get install -y python3-pip lcov
+          apt-get install -y python3-pip rsync lcov
           pip3 install fonttools
 
       - name: Run tests with coverage
@@ -50,26 +50,11 @@ jobs:
           file: coverage.lcov
           fail_ci_if_error: true
 
-  deploy:
-    needs: analyze
-    runs-on: ubuntu-latest
-    container:
-      image: dart:latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Setup SSH agent
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           log-public-key: false
-
-      - name: Install rsync
-        run: |
-          apt-get update -y
-          apt-get install -y rsync
 
       - name: Deploy to server
         run: |
